@@ -5,8 +5,10 @@ import reportWebVitals from './reportWebVitals';
 
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import App from './App';
-import SubPage from './page/Subpage';
-import NotFound from './page/NotFound';
+import SubPage from './pages/Subpage';
+import NoticeList from './pages/Board/Notice/NoticeList';
+import NotFound from './pages/NotFound';
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -16,6 +18,7 @@ root.render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/subpage" element={<SubPage />} />
+        <Route path="/notice" element={<NoticeList />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
