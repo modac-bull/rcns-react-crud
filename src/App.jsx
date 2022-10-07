@@ -53,7 +53,6 @@ export default  function App() {
 
 const Button = styled.button`
   padding: 20px 10px;
-
 `
 
 // area 공통 컴포넌트로 묶는 방식에 대해 고민 필요. 
