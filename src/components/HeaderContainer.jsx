@@ -10,13 +10,13 @@ export default function HeaderContainer() {
           <img src={logoimg} alt="노액트"></img>
           <HeaderRight>
             <HeaderNavList>
-              <Link to="/">메뉴1</Link>
+              <LinkMenu to="/subpage">코딩애플 Part2</LinkMenu>
             </HeaderNavList>
             <HeaderNavList>
-              <Link to="/">메뉴2</Link>
+              <LinkMenu to="/">메뉴2</LinkMenu>
             </HeaderNavList>
             <HeaderNavList>
-              <Link to="/">메뉴3</Link>
+              <LinkMenu to="/">메뉴3</LinkMenu>
             </HeaderNavList>
           </HeaderRight>
         </HeaderInner>
@@ -48,9 +48,13 @@ const HeaderInner = styled.div`
 
 const HeaderRight = styled.ul`
   display: flex;
-  border: 1px solid red;
 `
 
 const HeaderNavList = styled.li`
 
+`
+
+const LinkMenu = styled(Link)` 
+  padding: 0 15px;
+  border: 1px solid black;
 `
