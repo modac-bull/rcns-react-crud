@@ -1,6 +1,8 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 
+import {Link} from 'react-router-dom'
+
 
 
 import HeaderContainer from "../../../components/HeaderContainer";
@@ -92,11 +94,15 @@ function NoticeItem(list) {
 
   return(
     <Item key={list.id} className="py-4 flex">
-      <div className="ml-3">
-        <p className="text-m font-medium text-gray-900">{list.title}</p>
-        <p className="text-sm text-gray-500">{list.user}</p>
-        <p className="text-xs text-gray-300">{timeToDate(list.time)}</p>
-      </div>
+      <LinkItem
+        to='/notice/details/'
+      >
+        <div className="ml-3">
+          <p className="text-m font-medium text-gray-900">{list.title}</p>
+          <p className="text-sm text-gray-500">{list.user}</p>
+          <p className="text-xs text-gray-300">{timeToDate(list.time)}</p>
+        </div>
+      </LinkItem>
     </Item>
   )
 }
@@ -118,4 +124,7 @@ const Item = styled.li`
   :not(:last-child) {
     border-bottom: 1px solid #ddd;
   }
+`
+const LinkItem = styled(Link)`
+  cursor: pointer
 `
