@@ -32,6 +32,8 @@ import products from './assets/data/product.js';
 export default  function App() {
   let [product, setProduct] = useState(products);
 
+
+
   return (
     <>
      <Global
@@ -47,7 +49,7 @@ export default  function App() {
       </Global>
       <Routes>
         <Route path="/" element={<Main /> }/>
-        <Route path="/subpage" element={<SubPage product={product} />} />
+        <Route path="/subpage" element={<SubPage product={product}  setProduct={setProduct} />} />
         <Route path="/subpage/detail/:id" element={<SubPageDetail product={product}/>} /> 
         <Route path="/notice" element={<NoticeList />} />
         <Route path="/notice/details" element={<NoticeDetails />} />
