@@ -16,6 +16,9 @@ import axios from 'axios'; // axios
 export default function Subpage(props) {
   let navigate = useNavigate();
   let [input, setInput] = useState('');
+  let [moreCnt, setMoreCnt] = useState(0); // 더보기 버튼 카운트
+  let [isLoading, setIsLoading] = useState(false); // 로딩중 표시
+
   console.log(props)
 
   useEffect(() => {
@@ -49,6 +52,12 @@ export default function Subpage(props) {
               return <ItemProductCard key={idx} product={props.product[idx]} i={idx}></ItemProductCard>
             })
           }
+          {
+            isLoading ?
+            <p>로딩중입니다...</p> :
+            ''
+          }
+          
         </ProductContainer>
       <Outlet product={props.product}></Outlet>
 
@@ -63,18 +72,48 @@ export default function Subpage(props) {
       <div className="text-center">
         <h3 className="text-center text-3xl">AJAX 요청 실습</h3>
         <button onClick={() => {
-          // 리액트에선 거의 ajax로 통신한다.
-          axios.get('https://codingapple1.github.io/shop/data2.json')
-          .then((data) => {
-            console.log(data.data);
-            let copy = [...props.product, ...data.data];
-            // console.log(props);
-            props.setProduct(copy); // 부모 컴포넌트에 setState 끌어올려보기
-          })
-          .catch(() => { 
-            // AJAX 요청 숨기기. 예외처리 코드
-            console.log("실패했을 경우")
-          })
+          setMoreCnt(moreCnt + 1);
+          console.log(moreCnt)
+          if(moreCnt === 0) {
+            setIsLoading(true);
+
+            // 리액트에선 거의 ajax로 통신한다.
+            axios.get('https://codingapple1.github.io/shop/data2.json')
+            .then((data) => {
+              setIsLoading(false);
+
+              // console.log(data.data);
+              moreCnt++;
+              let copy = [...props.product, ...data.data];
+              // console.log(props);
+              props.setProduct(copy); // 부모 컴포넌트에 setState 끌어올려보기
+            })
+            .catch(() => { 
+              // AJAX 요청 숨기기. 예외처리 코드
+              console.log("실패했을 경우")
+            })
+          } else if (moreCnt === 1) {
+            setIsLoading(true);
+
+            // 리액트에선 거의 ajax로 통신한다.
+            axios.get('https://codingapple1.github.io/shop/data3.json')
+            .then((data) => {
+              setIsLoading(false);
+
+              // console.log(data.data);
+              moreCnt++;
+              let copy = [...props.product, ...data.data];
+              // console.log(props);
+              props.setProduct(copy); // 부모 컴포넌트에 setState 끌어올려보기
+            })
+            .catch(() => { 
+              // AJAX 요청 숨기기. 예외처리 코드
+              console.log("실패했을 경우")
+            })
+          } else {
+            alert('상품이 없습니다.')
+
+          }
           // <응용문제>
           // 1. 더보기 여러번 눌를 때
           // 2. 상품이 더 없을 경우 버튼 없애거나, 비활성화 시키고 싶을 때
@@ -84,18 +123,18 @@ export default function Subpage(props) {
           // axios.post('/url', {name : 'kim'}) 서버로 보낼 때
 
           // 여러곳에 POST
-          Promise.all([ axios.get('url1'), axios.get('url2')])
-          .then(() => {
-            // 둘다 완료 시 실행 코드
-          })
+          // Promise.all([ axios.get('url1'), axios.get('url2')])
+          // .then(() => {
+          //   // 둘다 완료 시 실행 코드
+          // })
 
 
           // fecth로 사용해보기
-          fetch('https://codingapple1.github.io/shop/data2.json')
-          .then(result => result.json())
-          .then(data=> {
-            console.log(data, 'fetch')
-          })
+          // fetch('https://codingapple1.github.io/shop/data2.json')
+          // .then(result => result.json())
+          // .then(data=> {
+          //   console.log(data, 'fetch')
+          // })
 
         }}>더보기</button>
       </div>
