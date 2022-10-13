@@ -5,10 +5,12 @@ import {useState, useEffect} from 'react';
 
 import {Link} from 'react-router-dom'
 
+import { timeToDate } from 'utils';
 
+import axios from 'axios'; // axios
 
-import HeaderContainer from "../../../components/HeaderContainer";
-import FooterContainer from '../../../components/FooterContainer';
+import HeaderContainer from "components/HeaderContainer";
+import FooterContainer from 'components/FooterContainer';
 
 
 /* 
@@ -28,20 +30,29 @@ const NEWS_URL = `https://api.hnpwa.com/v0/news/${CURRENT_PAGE}.json`
 
 
 
-
-export default function NoticeList() {
-  const [list, setList] = useState([]); // 게시판 데이터
+export default function NoticeList(props) {
+  // const [list, setList] = useState([]); // 게시판 데이터
   const [index, setIndex] = useState(CURRENT_PAGE); // 데이터 
+  console.log(props.list)
   
   useEffect(() => { // mount시 1회 실행
     console.log('useEffect')
 
-    fetch(NEWS_URL)
-    .then(result => result.json())
-    .then(data => {
-      console.log(data)
-      setList(data) // 게시판 1번째 불러온 데이터로 렌더
+    fetch(NEWS_URL,{
+      crossDomain:true,
+      method: 'GET',
+      headers: {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}, // CORS 정책 이슈 ..? 뭔지 모르겠음
     })
+    .then((response) => {
+      if(response.ok) {
+        return response.json();
+      }  
+      throw new Error('Network response was not ok.');
+    }).then((data) => {
+      props.setList(data); // 
+    }).catch((error) => {
+      console.log(`error: ${error}`)
+    });
 
     
   }, [])
@@ -67,12 +78,33 @@ export default function NoticeList() {
     function handleClick(e, index) {
       setIndex(index+1); // 페이지네이션
       e.preventDefault();
-      fetch(`https://api.hnpwa.com/v0/news/${index+1}.json`)
-      .then(result => result.json())
-      .then(data=> {
-        // console.log(data, 'fetch');
-        setList(data); 
+      fetch(`https://api.hnpwa.com/v0/news/${index+1}.json`, {
+        // crossDomain:true,
+        // method: 'GET',
+        // headers: {
+        //   'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
+        // }, // CORS 정책 이슈 ..? 뭔지 모르겠음
       })
+      .then((response) => {
+        if(response.ok) {
+          return response.json();
+        }  
+        throw new Error('Network response was not ok.');
+      }).then((data) => {
+        props.setList(data); // 
+      }).catch((error) => {
+        console.log(`error: ${error}`)
+      });
+      // axios.get(`https://api.hnpwa.com/v0/news/${index+1}.json`, {
+      //   headers: {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8',}, 
+      // })
+      // .then((data) => {
+      //   props.setList(data.data)
+      // })
+      // .catch(() => { 
+      //   // AJAX 요청 숨기기. 예외처리 코드
+      //   console.log("실패했을 경우")
+      // })
     }
 
     return (
@@ -91,10 +123,10 @@ export default function NoticeList() {
       <PageWrap>
         <h1 className="text-3xl text-center font-bold mb-10 ">게시판 실습</h1>
         <List className="bg-gray">
-          { (list.length === 0) ? (
+          { (props.list.length === 0) ? (
             <p className="text-l text-center mt-12 mb-12 font-bold">게시물이 없습니다.</p>
           ) : (
-            list.map((props) => {
+            props.list.map((props) => {
               {/* return NoticeItem(props) // 이렇게 할 경우 함수컴포넌트에서 .변수명 으로 한번 더 타고 들어갈 필요는 없는것 같다. */}
               return <NoticeItem key={props.id}  list={props}></NoticeItem>
             })
@@ -112,9 +144,6 @@ function NoticeItem(props) {
   // console.log(props)
   // console.log(props.type);
 
-  function timeToDate(date) {
-    return (new Date(date * 1000)).toUTCString();
-  }
 
   return(
     <Item className="py-4 flex">
@@ -122,7 +151,12 @@ function NoticeItem(props) {
         to={'/notice/details/'+props.list.id}
       >
         <div className="ml-3">
-          <p className="text-m font-medium text-gray-900">{props.list.title}</p>
+          <p className="text-m font-medium text-gray-900">
+            {props.list.title} 
+            <span className="text-sm ml-1 font-medium text-gray-500">
+              ({props.list.comments_count})
+            </span>
+          </p>
           <p className="text-sm text-gray-500">{props.list.user}</p>
           <p className="text-xs text-gray-300">{timeToDate(props.list.time)}</p>
         </div>

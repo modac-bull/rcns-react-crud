@@ -1,48 +1,70 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
 import styled from '@emotion/styled'
 
-import HeaderContainer from "../../../components/HeaderContainer";
-import FooterContainer from '../../../components/FooterContainer';
+import { useNavigate , useParams} from 'react-router-dom'
 
-export default function NoticeDetails() {
-  let [title, setTitle] = useState(['남자 코트 추천','제목2222', '제목3333']);
-  let [likes, setLikes] = useState(0)
+import HeaderContainer from "components/HeaderContainer";
+import FooterContainer from 'components/FooterContainer';
+import CommentList from './CommentList';
 
+import { timeToDate } from 'utils'
+
+export default function NoticeDetails(props) {
+  let {id} = useParams();
+  const [content, setContent] = useState([]);
+  const [comment, setComment] = useState([]);
+
+  console.log(id)
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    console.log('NoticeDetails mount 시 1회');
+    console.log(props)
+    fetch(`https://api.hnpwa.com/v0/item/${id}.json`)
+    .then(result => result.json())
+    .then(data => { 
+      // console.log(data)
+      setContent(data);
+      let copy = [...data.comments]
+      setComment(copy);
+      // console.log(copy)
+    })
+  }, [])
 
   return(
     <>
       <HeaderContainer />
         <ContentWrap>
-          <h1 className="font-bold text-3xl text-center mt-10 mb-10">
-          {title[0]}
-          <span className="ml-5">{likes}</span>
-          </h1>
+          <div>
+            <h1 className="font-bold text-3xl mt-10 mb-10">
+              {content.title}
+              <span className="text-sm ml-5">total comments : ({content.comments_count})</span>
+            </h1>
+            <p>작성자 : {content.user}</p>
+            <p>작성날짜 : {timeToDate(content.time)}</p>
+          </div>
           {/* 게시판 목록 페이지 */}
-          <p className="text-sm text-gray-900">게시판 상세</p>
-          <div className="text-center">
+          {
+            content.content !== '' ? 
+            <p className="text-sm text-gray-900 min-h-screen border-solid border">
+              {content.content}
+            </p>
+            :
+            null
+          }
+          <CommentWrap>
+            {
+              comment.map((v, i) => {
+                return <CommentList key={v.id} comment={v} />
+              })
+            }
+          </CommentWrap>
+          <div className="text-center py-16">
             <button 
-              className="px-5 py-2 mx-2 border-solid border-1 border-sky-500 rounded-sm"
-              onClick={() => {
-                // console.log(title[0]); 
-                // setTitle(title = ['여자코트 추천하기', '제목2222', '제목3333'])
-                let copy = [...title];
-                copy[0] = '여자코트 추천';
-                console.log(copy);
-                setTitle(copy);
-              }}>수정하기
-            </button>
-            <button 
-              className="px-5 py-2 mx-2 border-solid border-1 border-sky-500 rounded-sm"
-              onClick={() => { setLikes( likes + 1 )} }>좋아요
-            </button>
-            <button 
-              className="px-5 py-2 mx-2 border-solid border-1 border-sky-500 rounded-sm"
-              onClick={() => { 
-                setLikes( 0 ); 
-                console.log(title)
-                setTitle([...title]); // 이런다고 초기값이 불러와지지 않는다.
-                } }>초기화
+              className="px-5 py-2 mx-2 border-solid border-1 border-gray-500 rounded-sm"
+              onClick={() => { navigate('/notice') }}>
+                목록으로
             </button>
           </div>
         </ContentWrap>
@@ -51,6 +73,7 @@ export default function NoticeDetails() {
   )
 }
 
+
 const ContentWrap = styled.div`
   padding-top: 120px;
   padding-left: 60px;
@@ -58,5 +81,8 @@ const ContentWrap = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   min-height: 100vh;
-  border: 1px solid red;
+`
+
+const CommentWrap = styled.ul`
+  /* border: 1px solid red; */
 `

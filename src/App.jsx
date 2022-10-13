@@ -31,6 +31,7 @@ import products from './assets/data/product.js';
 
 export default  function App() {
   let [product, setProduct] = useState(products);
+  let [list, setList] = useState([])
 
 
 
@@ -50,9 +51,9 @@ export default  function App() {
       <Routes>
         <Route path="/" element={<Main /> }/>
         <Route path="/subpage" element={<SubPage product={product}  setProduct={setProduct} />} />
-        <Route path="/subpage/detail/:id" element={<SubPageDetail product={product}/>} /> 
-        <Route path="/notice" element={<NoticeList />} />
-        <Route path="/notice/details" element={<NoticeDetails />} />
+        <Route path="/subpage/detail/:id" element={<SubPageDetail product={product} setList={setList}/>} /> 
+        <Route path="/notice" element={<NoticeList list={list} setList={setList}/>} />
+        <Route path="/notice/details/:id" element={<NoticeDetails />}  />
         <Route path="/event" element={<Event />}>
           <Route path="one" element={<p className="text-center">첫번째 이벤트</p>}/>
           <Route path="two" element={<p className="text-center">두번째 이벤트</p>}/>
