@@ -7,9 +7,8 @@ import styled from '@emotion/styled'
 import Reset from './shared/styles/rest.css';
 
 import {Link} from 'react-router-dom'
-
-
 import {BrowserRouter, Routes, Route} from "react-router-dom";
+
 import SubPage from './pages/Subpage';
 import SubPageDetail from './pages/SubpageDetail';
 import NoticeList from './pages/Board/Notice/NoticeList';
@@ -17,23 +16,14 @@ import NoticeDetails from './pages/Board/Notice/NoticeDetails';
 import NotFound from './pages/NotFound';
 import Event from './pages/Event';
 import Main from './pages/Main';
-
+import Example from './pages/Example'
 import products from './assets/data/product.js';
-
-
-// 추후 진행
-// function ListItem() {
-//   return (
-//     <li></li>
-//   )
-// }
+import Cart from 'pages/Cart';
 
 
 export default  function App() {
   let [product, setProduct] = useState(products);
   let [list, setList] = useState([])
-
-
 
   return (
     <>
@@ -58,6 +48,9 @@ export default  function App() {
           <Route path="one" element={<p className="text-center">첫번째 이벤트</p>}/>
           <Route path="two" element={<p className="text-center">두번째 이벤트</p>}/>
         </Route>
+        <Route path="/example" element={<Example />} />
+        <Route path="/cart" element={<Cart />} />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

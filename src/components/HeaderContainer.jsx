@@ -1,22 +1,27 @@
 import styled from '@emotion/styled';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import logoimg from "../assets/imgs/logo_img.svg";
 
 export default function HeaderContainer() {
+  let navigate = useNavigate();
+
   return (
     <>
       <Header className='test'>
         <HeaderInner>
-          <img src={logoimg} alt="노액트"></img>
+          <img className="cursor-pointer" src={logoimg} alt="노액트" onClick={() => { navigate('/') }}></img>
           <HeaderRight>
             <HeaderNavList>
               <LinkMenu to="/subpage">코딩애플 Part2</LinkMenu>
             </HeaderNavList>
             <HeaderNavList>
-              <LinkMenu to="/">메뉴2</LinkMenu>
+              <LinkMenu to="/notice">게시판</LinkMenu>
             </HeaderNavList>
             <HeaderNavList>
-              <LinkMenu to="/">메뉴3</LinkMenu>
+              <LinkMenu to="/example">실습 페이지</LinkMenu>
+            </HeaderNavList>
+            <HeaderNavList>
+              <LinkMenu to="/cart">장바구니</LinkMenu>
             </HeaderNavList>
           </HeaderRight>
         </HeaderInner>
