@@ -5,10 +5,11 @@ import styled from '@emotion/styled'
 
 import {Routes, Route, Link, useNavigate, Outlet} from 'react-router-dom'
 
-import FooterContainer from '../components/FooterContainer';
-import ShopNav from '../components/NavShop';
+import HeaderContainer from 'components/HeaderContainer';
+import FooterContainer from 'components/FooterContainer';
+import ShopNav from 'components/NavShop';
 
-// import sample1 from '../assets/imgs/sample.png' // css 스타일로 적용할 땐 import 해와서 사용하기
+// import sample1 from 'assets/imgs/sample.png' // css 스타일로 적용할 땐 import 해와서 사용하기
 
 import axios from 'axios'; // axios
 
@@ -19,12 +20,8 @@ export default function Subpage(props) {
   let [moreCnt, setMoreCnt] = useState(0); // 더보기 버튼 카운트
   let [isLoading, setIsLoading] = useState(false); // 로딩중 표시
 
-  console.log(props)
-
   useEffect(() => {
-    console.log(input);
     const REG_NUMBER = /[^0-9]/; // 숫자를 제외한 모든 문자
-    console.log(REG_NUMBER.test(input), '숫자를 포함함');
     if(REG_NUMBER.test(input)) { // 문자열만 포함
       alert('안돼요')
     }
@@ -33,15 +30,14 @@ export default function Subpage(props) {
 
   return(
     <>
-      <div>
-        <ShopNav />
-        <div className="text-center">
-          <p className="text-center mx-auto mt-4">이동 경로 useNavigate로 이동하기</p>
-          <button className="p-3 mt-1 border border-solid text-center" onClick={() => { navigate('/subpage/detail') }}>이동 버튼</button>
-        </div>
-
-      </div>
+      <HeaderContainer />
       <PageContentWrap>
+        <div>
+          <div className="text-center pt-200">
+            <p className="text-center mx-auto pt-4">이동 경로 useNavigate로 이동하기</p>
+            <button className="p-3 mt-1 border border-solid text-center" onClick={() => { navigate('/subpage/detail') }}>이동 버튼</button>
+          </div>
+        </div>
         <MainBg src="https://codingapple.com/wp-content/uploads/2022/04/bg.png"></MainBg>
         <ProductContainer>
           {/* <ItemProductCard product={props.product[0]} i={1}></ItemProductCard>
