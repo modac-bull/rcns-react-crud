@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */  
 // 작성방법 1. 인라인 CSS 작성방법
-import {useState} from 'react';
+import {useState, useEffect, useRef} from 'react';
 
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
@@ -176,12 +176,48 @@ export default function Main() {
                   className="p-2 border-solid border border-gray-400">글발행</button>
 
         </ContentWrap>
+        <StateExample />
       </AreaWrap>
       <RecentProduct />
       <FooterContainer />
     </>
   )
 }
+
+function StateExample() {
+  /* 
+    state1, state2 변경하는 코드를 작성할 때 가끔 문제가 생긴다.
+    state가 async스럽게 작동하기 때문에
+    sync스럽게 실행하고 싶을 때 해결책은 useEffect를 사용한다.
+  */
+  let [count, setCount] = useState(0);
+  let [age, setAge] = useState(20);
+
+  // (주의) 18 버전 이상부터는 useEffect가 마운트 시 2회 실행된다. (development 모드에서만 2회 실행 - 왜? 오류 잡아내라고)
+  // 방어코드 작성할 때 고려해야 함
+  let initialRenderer = useRef(true); // 플래그 변수 사용해서 최초1회만 실행되도록 한다.
+  useEffect(() => {
+    if( initialRenderer.current) {
+    } else {
+      if( count !== 0 && count < 3) {
+        setAge(age+1)
+      }
+    }
+  }, [count ])
+  return(
+    <div className="flex-col justify-items-center text-center py-20 ">
+      <div>안녕하십니까 전 {age}</div>
+      <button 
+        onClick={() => {
+          initialRenderer.current = false;
+
+          setCount(count+1);
+        }}
+        className="border-solid border border-gray-900 mt-10">누르면 한살먹기</button>
+    </div>
+  )
+}
+
 
 const Button = styled.button`
   padding: 20px 10px;
