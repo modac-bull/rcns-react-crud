@@ -3,7 +3,7 @@
   import HeaderContainer from "components/HeaderContainer";
 
   import { useDispatch, useSelector } from 'react-redux'
-  import {  addCount } from "redux/store";
+  import {  addCount } from "redux/cartSlice";
   import { changeName, changeAge} from "redux/userSlice";
 
   export default function Cart() {
@@ -43,7 +43,7 @@
                     return (
                       <tr key={i}>
                         <td>{product.id}</td>
-                        <td>{product.name}</td>
+                        <td>{product.title}</td>
                         <td>{product.count}</td>
                         <td>
                         <button className="p-4 border-solid border"
@@ -73,6 +73,7 @@
     padding-top: 200px;
     padding-left: 60px;
     padding-right: 60px;
+    padding-bottom: 200px;
     min-height: 100vh;
   `
 

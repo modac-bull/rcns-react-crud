@@ -4,13 +4,26 @@ import styled from '@emotion/styled';
 
 import {Link, useParams} from 'react-router-dom';
 
+import { useDispatch, useSelector} from 'react-redux'
+import { addCart } from 'redux/cartSlice';
+
 
 export default function SubpageDetail(props) {
   let {id} = useParams();
-  let matchIndex = props.product.find(function(x) {
+  let product = useSelector((state) => {return state.product});
+  console.log(product)
+  // Redux 활용
+  let matchIndex = product.find(function(x) {
     return x.id == id;
   })
+  let dispatch = useDispatch();
+
+  // let matchIndex = props.product.find(function(x) {
+  //   return x.id == id;
+  // })
   let [box, setBox] = useState(true);
+
+
   // Lifecycle과 useEffect 실습
   useEffect(() => {
     console.log('안녕'); 
@@ -37,7 +50,12 @@ export default function SubpageDetail(props) {
           <p className="pt-5 font-light text-sm">{matchIndex.content}</p>
           <p className="pt-5 font-light text-sm">{matchIndex.price}</p>
           <Link to="/subpage" className="inline-block mt-5 p-5 border border-solid">목록으로</Link> 
-          <CustomBtn bg="orange">주문하기</CustomBtn> 
+          <CustomBtn 
+            onClick={() => {
+              console.log(matchIndex)
+              dispatch(addCart({id: 4, title : "Red Knit", count: 1}))
+            }}
+            bg="orange">주문하기</CustomBtn> 
           <CustomBtn bg="orange"
             onClick = {() => {
               return setCount(count+1)

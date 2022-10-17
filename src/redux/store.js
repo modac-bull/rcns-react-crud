@@ -1,28 +1,18 @@
 import { configureStore, createSlice, current } from '@reduxjs/toolkit'
 
 import {user} from 'redux/userSlice'
+import {cart} from 'redux/cartSlice'
+import {product} from 'redux/produtSlice'
 
-let cart = createSlice({
-  name : 'cart',
-  initialState :[
-    {id: 0, name: 'White and Black', count : 2},
-    {id: 1, name: 'Grey Yordan', count : 1}
-  ],
-  reducers : {
-    addCount(state, action) {
-      state[action.payload].count += 1; // state 배열일 경우에 이렇게 수정했음
-    }
-  }
-})
 
 export default configureStore({
   reducer: {
     user : user.reducer,
     cart : cart.reducer,
+    product : product.reducer
   }
 })
 
-export let { addCount } = cart.actions
 
 /* 
 1. createSlice() 상단에서 import 해온 후 state 생성

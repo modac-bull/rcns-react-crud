@@ -4,7 +4,7 @@ let products = [
     title : "White and Black",
     content : "Born in France",
     imgs : 'https://codingapple1.github.io/shop/shoes1.jpg',
-    price : 120000
+    price : 120000,
   },
   {
     id : 2,
