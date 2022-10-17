@@ -5,7 +5,7 @@ export let cart = createSlice({
   name : 'cart',
   initialState :[
     {id: 0, title: 'White and Black', count : 2},
-    {id: 1, title: 'Grey Yordan', count : 1}
+    {id: 2, title: 'Grey Yordan', count : 1}
   ],
   reducers : {
     addCount(state, action) {
@@ -14,12 +14,29 @@ export let cart = createSlice({
       let matchIndex = state.findIndex((i) => { return i.id === action.payload  })
       state[matchIndex].count ++;
 
+      console.log(action.payload)
     },
     addCart(state, action) {
-      state.push(action.payload)
+      let matchIndex = state.findIndex((i) => { 
+        console.log(typeof(i.id), typeof(action.payload.id))
+        return Number(i.id) === Number(action.payload.id) 
+      })
+      let copy = [...state]
+      console.log(copy, matchIndex)
+      if( matchIndex !== -1) {
+        // 값이 있으면
+        state[matchIndex].count ++;
+      } else {
+        state.push(action.payload)
+      }
       // console.log(state, action);
+    },
+    deleteItem(state, action) {
+      console.log(action.payload)
+      let matchIndex = state.findIndex((i) => { return i.id === action.payload  });
+      state.splice(matchIndex, 1)
     }
   }
 })
 
-export let { addCount, addCart } = cart.actions
+export let { addCount, addCart, deleteItem } = cart.actions

@@ -3,7 +3,7 @@
   import HeaderContainer from "components/HeaderContainer";
 
   import { useDispatch, useSelector } from 'react-redux'
-  import {  addCount } from "redux/cartSlice";
+  import {  addCount, deleteItem } from "redux/cartSlice";
   import { changeName, changeAge} from "redux/userSlice";
 
   export default function Cart() {
@@ -34,6 +34,7 @@
                   <th>상품명</th>
                   <th>수량</th>
                   <th>변경하기</th>
+                  <th>삭제</th>
                 </tr>
               </thead>
               <tbody>
@@ -53,11 +54,19 @@
                             dispatch(addCount(product.id))
                         }}>+</button>
                         </td>
+                        <td>
+                          <button className="p-4 border-solid border"
+                            onClick={() => {
+                              dispatch(deleteItem(product.id))
+                            }}
+                          >삭제
+                          </button>
+                        </td>
                       </tr>
                     )
                   }) :
                   <tr>
-                    <td colspan="4">제품이 없습니다.</td>
+                    <td colSpan="5">제품이 없습니다.</td>
                   </tr>
                 }
                 

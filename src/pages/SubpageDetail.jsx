@@ -53,7 +53,7 @@ export default function SubpageDetail(props) {
           <CustomBtn 
             onClick={() => {
               console.log(matchIndex)
-              dispatch(addCart({id: 4, title : "Red Knit", count: 1}))
+              dispatch(addCart({id: id, title : matchIndex.title, count: 1}))
             }}
             bg="orange">주문하기</CustomBtn> 
           <CustomBtn bg="orange"
