@@ -1,4 +1,3 @@
-
 /** @jsxImportSource @emotion/react */  
 // 작성방법 1. 인라인 CSS 작성방법
 import {useState} from 'react';
@@ -8,11 +7,25 @@ import styled from '@emotion/styled'
 
 import {Link} from 'react-router-dom'
 
+import HeaderContainer from 'components/HeaderContainer';
+import FooterContainer from 'components/FooterContainer';
+import RecentProduct from 'components/RecentProduct'
 
-import HeaderContainer from './../components/HeaderContainer';
-import FooterContainer from './../components/FooterContainer';
 
+/* 
+Local Storage
+- 문자만 저장할 수 있는 공간
+- 5MB 정도 저장할 수 있다.
+*/
+localStorage.setItem('data1', '로컬 스토리지에있는 데이터입니다.');
+let dataStorage = localStorage.getItem('data1');
+console.log(dataStorage);
+localStorage.removeItem('data')
 
+localStorage.setItem('obj', JSON.stringify({name:'kim'}));
+let a = localStorage.getItem('obj');
+let b = JSON.parse(a);
+console.log(b)
 
 // 보통 Component 안에 Component를 생성하진 않는다.
 function Modal(props) {
@@ -164,11 +177,11 @@ export default function Main() {
 
         </ContentWrap>
       </AreaWrap>
+      <RecentProduct />
       <FooterContainer />
     </>
   )
 }
-
 
 const Button = styled.button`
   padding: 20px 10px;

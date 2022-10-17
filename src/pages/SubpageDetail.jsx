@@ -34,8 +34,23 @@ export default function SubpageDetail(props) {
      - 굉장이 오래걸리는 쓸데 없는 코드 일 경우에 일단 html 렌더 된 후에 동작되도록 할 수 있다.
      - 컴포넌트의 핵심 기능은 html 렌더링. 이 외 기능들은 useEffect에 적어라 (대충 이런뜻)
     */
-   let a = setTimeout(() => { setBox(false) }, 2000);
-   return () => { clearTimeout(a) }
+  //  let a = setTimeout(() => { setBox(false) }, 2000);
+  //  return () => { clearTimeout(a) }
+
+  let watchedArr = JSON.parse(localStorage.getItem('watched'));
+  if( !watchedArr.includes(Number(id)) ) {
+    watchedArr.push(Number(id));
+  }
+  localStorage.setItem('watched', JSON.stringify(watchedArr))
+  // console.log(watchedArr);
+  /* 
+  중복제거 
+  - Set 활용해보기
+  중복제거가 필요하다. 그럴땐 Set 사용하면 좋다.
+  array->Set->array 변환도 용이함
+  */
+
+
   }, [])
   let [count, setCount] = useState(0);
 

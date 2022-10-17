@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */  
 // 작성방법 1. 인라인 CSS 작성방법
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
 import { Global, css } from '@emotion/react'
 import styled from '@emotion/styled'
@@ -24,6 +24,14 @@ import Cart from 'pages/Cart';
 export default  function App() {
   let [product, setProduct] = useState(products);
   let [list, setList] = useState([])
+
+  useEffect(() => {
+    // 응용 새로고침해도 watcehd에 값이 있을 경우엔 초기화 진행 X
+    if(JSON.parse(localStorage.getItem('watched')) && JSON.parse(localStorage.getItem('watched')).length > 0) {
+      return
+    }
+    localStorage.setItem('watched', JSON.stringify([]))
+  });
 
   return (
     <>

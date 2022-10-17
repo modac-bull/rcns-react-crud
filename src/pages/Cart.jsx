@@ -3,7 +3,7 @@
   import HeaderContainer from "components/HeaderContainer";
 
   import { useDispatch, useSelector } from 'react-redux'
-  import {  addCount, deleteItem } from "redux/cartSlice";
+  import { addCount, deleteItem } from "redux/cartSlice";
   import { changeName, changeAge} from "redux/userSlice";
 
   export default function Cart() {
