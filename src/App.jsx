@@ -19,6 +19,8 @@ import Main from './pages/Main';
 import Example from './pages/Example'
 import products from './assets/data/product.js';
 import Cart from 'pages/Cart';
+import CommonList from 'pages/Board/Common/CommonList';
+import CommonDetails from 'pages/Board/Common/CommonDetails'
 
 
 export default  function App() {
@@ -58,6 +60,8 @@ export default  function App() {
         </Route>
         <Route path="/example" element={<Example />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/common" element={<CommonList />} />
+        <Route path="/common/details/:id" element={<CommonDetails />}  />
 
         <Route path="*" element={<NotFound />} />
       </Routes>

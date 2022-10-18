@@ -12,16 +12,19 @@ export default function HeaderContainer() {
           <img className="cursor-pointer" src={logoimg} alt="노액트" onClick={() => { navigate('/') }}></img>
           <HeaderRight>
             <HeaderNavList>
-              <LinkMenu to="/subpage">코딩애플 Part2</LinkMenu>
-            </HeaderNavList>
-            <HeaderNavList>
-              <LinkMenu to="/notice">게시판</LinkMenu>
-            </HeaderNavList>
-            <HeaderNavList>
-              <LinkMenu to="/example">실습 페이지</LinkMenu>
+              <LinkMenu to="/subpage">상품 목록 페이지</LinkMenu>
             </HeaderNavList>
             <HeaderNavList>
               <LinkMenu to="/cart">장바구니</LinkMenu>
+            </HeaderNavList>
+            <HeaderNavList>
+              <LinkMenu to="/example">탭 UI 실습 페이지</LinkMenu>
+            </HeaderNavList>
+            <HeaderNavList>
+              <LinkMenu to="/notice">해커스 API 게시판</LinkMenu>
+            </HeaderNavList>
+            <HeaderNavList>
+              <LinkMenu to="/common">일반게시판</LinkMenu>
             </HeaderNavList>
           </HeaderRight>
         </HeaderInner>

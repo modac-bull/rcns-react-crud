@@ -1,15 +1,17 @@
-import { configureStore, createSlice, current } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit'
 
 import {user} from 'redux/userSlice'
 import {cart} from 'redux/cartSlice'
 import {product} from 'redux/produtSlice'
+import { board } from './boardSlice'
 
 
 export default configureStore({
   reducer: {
     user : user.reducer,
     cart : cart.reducer,
-    product : product.reducer
+    product : product.reducer,
+    board : board.reducer
   }
 })
 
