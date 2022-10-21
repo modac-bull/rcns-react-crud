@@ -13,6 +13,8 @@ import SubPage from './pages/Subpage';
 import SubPageDetail from './pages/SubpageDetail';
 import NoticeList from './pages/Board/Notice/NoticeList';
 import NoticeDetails from './pages/Board/Notice/NoticeDetails';
+import NoticeAjaxList from 'pages/Board/NoticeAjax/NoticeAjaxList';
+import NoticeAjaxDetails from 'pages/Board/NoticeAjax/NoticeAjaxDetails';
 import NotFound from './pages/NotFound';
 import Event from './pages/Event';
 import Main from './pages/Main';
@@ -54,6 +56,8 @@ export default  function App() {
         <Route path="/subpage/detail/:id" element={<SubPageDetail product={product} setList={setList}/>} /> 
         <Route path="/notice" element={<NoticeList list={list} setList={setList}/>} />
         <Route path="/notice/details/:id" element={<NoticeDetails />}  />
+        <Route path="/notice_ajax" element={<NoticeAjaxList list={list} setList={setList}/>} />
+        <Route path="/notice_ajax/details/:id" element={<NoticeAjaxDetails />}  />
         <Route path="/event" element={<Event />}>
           <Route path="one" element={<p className="text-center">첫번째 이벤트</p>}/>
           <Route path="two" element={<p className="text-center">두번째 이벤트</p>}/>

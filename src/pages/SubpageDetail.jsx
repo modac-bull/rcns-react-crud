@@ -11,7 +11,7 @@ import { addCart } from 'redux/cartSlice';
 export default function SubpageDetail(props) {
   let {id} = useParams();
   let product = useSelector((state) => {return state.product});
-  console.log(product)
+  console.log(product);
   // Redux 활용
   let matchIndex = product.find(function(x) {
     return x.id == id;

@@ -21,7 +21,10 @@ export default function HeaderContainer() {
               <LinkMenu to="/example">탭 UI 실습 페이지</LinkMenu>
             </HeaderNavList>
             <HeaderNavList>
-              <LinkMenu to="/notice">해커스 API 게시판</LinkMenu>
+              <LinkMenu to="/notice">게시판 페이지네이션</LinkMenu>
+            </HeaderNavList>
+            <HeaderNavList>
+              <LinkMenu to="/notice_ajax">게시판 무한스크롤</LinkMenu>
             </HeaderNavList>
             <HeaderNavList>
               <LinkMenu to="/common">일반게시판</LinkMenu>
