@@ -4,7 +4,9 @@
   - 코딩애플 강의 실습 내용
   - 메인페이지, 블로그 글 발행 실습, 상품 목록/상세 페이지, 장바구니
 - 게시판 CRUD 실습
-  - HACKERS NEWS API 활용하여 게시판 개발
+  - HACKERS NEWS API 활용하여 게시판 (페이지네이션)
+  - HACKERS NEWS API 활용하여 게시판 (무한 스크롤)
+  - 민터스 공지사항 게시판
 
 
 ## 게시판 화면 설계
@@ -23,7 +25,7 @@
   - 작성일, 제목, 내용 노출
   - 목록으로 돌아가는 버튼
 
-## 컴포넌트 설계
+## 컴포넌트 설계 (민터스 게시판 예시)
 1. 게시물 목록 - Board/Common/CommonList.jsx
 2. 게시물 상세 - Board/Common/CommonDetails.jsx
 

@@ -121,7 +121,7 @@ export default function NoticeList(props) {
     <>
       <HeaderContainer />
       <PageWrap>
-        <h1 className="text-3xl text-center font-bold mb-10 ">게시판 실습</h1>
+        <h1 className="text-3xl text-center font-bold mb-10 ">게시판 페이지네이션</h1>
         <List className="bg-gray">
           { (props.list.length === 0) ? (
             <p className="text-l text-center mt-12 mb-12 font-bold">게시물이 없습니다.</p>

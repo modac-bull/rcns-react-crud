@@ -12,13 +12,13 @@ export default function HeaderContainer() {
           <img className="cursor-pointer" src={logoimg} alt="노액트" onClick={() => { navigate('/') }}></img>
           <HeaderRight>
             <HeaderNavList>
-              <LinkMenu to="/subpage">상품 목록 페이지</LinkMenu>
+              <LinkMenu to="/subpage">(코딩애플) 상품 목록</LinkMenu>
             </HeaderNavList>
             <HeaderNavList>
-              <LinkMenu to="/cart">장바구니</LinkMenu>
+              <LinkMenu to="/example">(코딩애플) 탭 UI</LinkMenu>
             </HeaderNavList>
             <HeaderNavList>
-              <LinkMenu to="/example">탭 UI 실습 페이지</LinkMenu>
+              <LinkMenu to="/cart">(코딩애플) 장바구니</LinkMenu>
             </HeaderNavList>
             <HeaderNavList>
               <LinkMenu to="/notice">게시판 페이지네이션</LinkMenu>
@@ -27,7 +27,7 @@ export default function HeaderContainer() {
               <LinkMenu to="/notice_ajax">게시판 무한스크롤</LinkMenu>
             </HeaderNavList>
             <HeaderNavList>
-              <LinkMenu to="/common">일반게시판</LinkMenu>
+              <LinkMenu to="/common">(민터스) 일반게시판</LinkMenu>
             </HeaderNavList>
           </HeaderRight>
         </HeaderInner>
